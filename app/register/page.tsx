@@ -1,8 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { useSignUp } from "@clerk/nextjs";
+import { useSignUp, useSignIn } from "@clerk/nextjs";
+import { OAuthStrategy } from "@clerk/types";
 import { useRouter } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
+import { FaMicrosoft, FaGithub } from "react-icons/fa";
+import Image from "next/image";
 
 interface SignUpData {
   first_name: string;
@@ -11,11 +15,62 @@ interface SignUpData {
   password: string;
 }
 
+function SignInOAuthButtons() {
+  const { signIn } = useSignIn();
+
+  const signInWith = (strategy: OAuthStrategy) => {
+    return signIn?.authenticateWithRedirect({
+      strategy,
+      redirectUrl: "/sso-callback",
+      redirectUrlComplete: "/dashboard",
+    });
+  };
+  return (
+    <div>
+      <button
+        onClick={() => signInWith("oauth_google")}
+        className="w-full mb-3 text-gray-800 font-medium text-center rounded-sm px-5 py-1.5 text-base border-2 border-theme"
+      >
+        <div className="flex items-center justify-center">
+          <FcGoogle className="m-2" size={25} />
+          <p>Google</p>
+        </div>
+      </button>
+      <button
+        onClick={() => signInWith("oauth_microsoft")}
+        className="w-full mb-3 text-gray-800  font-medium rounded-sm px-5 py-1 text-base text-center border-2 border-theme"
+      >
+        <div className="flex items-center justify-center">
+          {/* <FaMicrosoft className="m-2" /> */}
+          <Image
+            src="https://parspng.com/wp-content/uploads/2022/06/microsoftpng.parspng.com-2.png"
+            alt="..."
+            width={60}
+            height={60}
+            unoptimized
+          />
+          <p>Microsoft</p>
+        </div>
+      </button>
+      <button
+        onClick={() => signInWith("oauth_github")}
+        className="w-full mb-3 text-gray-800 font-medium rounded-sm text-base px-5 py-1.5 text-center border-2 border-theme"
+      >
+        <div className="flex items-center justify-center">
+          <FaGithub className="m-2" size={25} />
+          <p>Github</p>
+        </div>
+      </button>
+    </div>
+  );
+}
+
 const RegisterPage: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [passwordAgain, setPasswordAgain] = useState<string>("");
   const [pendingVerification, setPendingVerification] =
     useState<boolean>(false);
   const [code, setCode] = useState<string>("");
@@ -27,7 +82,7 @@ const RegisterPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!isLoaded) {
+    if (!isLoaded || password !== passwordAgain) {
       return;
     }
 
@@ -72,81 +127,77 @@ const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div className="border p-5 rounded" style={{ width: "500px" }}>
-      <h1 className="text-2xl mb-4">Register</h1>
+    <div
+      className="border p-5 rounded-sm shadow-lg mb-5"
+      style={{ width: "500px" }}
+    >
+      <h1 className="text-2xl mb-4 text-center">GoTrack</h1>
+      <p className="text-center text-black mb-4">Sign up to continue</p>
       {!pendingVerification && (
         <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
           <div>
-            <label
-              htmlFor="first_name"
-              className="block mb-2 text-sm font-medium text-gray-900"
-            >
-              First Name
-            </label>
             <input
               type="text"
               name="first_name"
               id="first_name"
               onChange={(e) => setFirstName(e.target.value)}
-              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-              required={true}
+              placeholder="Enter first name"
+              className="bg-white border border-theme text-gray-800 sm:text-sm rounded-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+              required
             />
           </div>
           <div>
-            <label
-              htmlFor="last_name"
-              className="block mb-2 text-sm font-medium text-gray-900"
-            >
-              Last Name
-            </label>
             <input
               type="text"
               name="last_name"
               id="last_name"
               onChange={(e) => setLastName(e.target.value)}
-              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-              required={true}
+              placeholder="Enter last name"
+              className="bg-white border border-theme text-gray-800 sm:text-sm rounded-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+              required
             />
           </div>
           <div>
-            <label
-              htmlFor="email"
-              className="block mb-2 text-sm font-medium text-gray-900"
-            >
-              Email Address
-            </label>
             <input
               type="email"
               name="email"
               id="email"
               onChange={(e) => setEmail(e.target.value)}
-              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-              placeholder="name@company.com"
-              required={true}
+              placeholder="Enter email address"
+              className="bg-white border border-theme text-gray-800 sm:text-sm rounded-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+              required
             />
           </div>
           <div>
-            <label
-              htmlFor="password"
-              className="block mb-2 text-sm font-medium text-gray-900"
-            >
-              Password
-            </label>
             <input
               type="password"
               name="password"
               id="password"
               onChange={(e) => setPassword(e.target.value)}
-              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
-              required={true}
+              placeholder="Enter password"
+              className="bg-white border border-theme text-gray-800 sm:text-sm rounded-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+              required
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              name="password_again"
+              id="password_again"
+              onChange={(e) => setPasswordAgain(e.target.value)}
+              placeholder="Enter password again"
+              className="bg-white border border-theme text-gray-800 sm:text-sm rounded-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+              required
             />
           </div>
           <button
             type="submit"
-            className="w-full text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            className="w-full text-white bg-theme hover:bg-blue-700 font-medium rounded-sm text-sm px-5 py-2.5 text-center"
           >
-            Create an account
+            Continue
           </button>
+          <p className="text-center text-gray-600 mb-4">Or Continue with:</p>
+          <SignInOAuthButtons />
         </form>
       )}
       {pendingVerification && (
