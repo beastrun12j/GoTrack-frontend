@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   description: "User Management System",
 };
 
+const publishableKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -19,7 +21,7 @@ export default function RootLayout({
   // const { isSignedIn, user, isLoaded } = useUser();
 
   return (
-    <ClerkProvider>
+    <ClerkProvider publishableKey={publishableKey}>
       <html lang="en">
         <body className={inter.className}>
           <Header username={"Guest"}/>
