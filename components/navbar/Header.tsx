@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { UserButton, auth } from "@clerk/nextjs";
+import NavLink from "./Nav-link";
 
 interface HeaderProps {
   username: string;
@@ -8,14 +9,39 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = async ({ username }) => {
   const { userId } = auth();
 
+  
+
   return (
-    <nav className="flex items-center justify-between px-6 py-4 shadow-md bg-white-700">
-      <div className="flex items-center">
+    <nav className="flex items-center justify-between px-6 shadow-md bg-white-700">
+
+      <div className="left-side flex items-center">
+
         <Link href="/">
-          <div className="text-lg font-bold text-black-900 uppercase">GoTrack</div>
+          <div className="text-lg font-bold text-black-900 uppercase mx-3">GoTrack</div>
         </Link>
+
+        {userId && (
+          <>
+
+          <NavLink href="/dashboard">
+            <div className="text-black-900 hover:text-gray-500 mx-3 text-center">Home</div>
+          </NavLink>
+
+          <NavLink href="/notifications">
+            <div className="text-black-900 hover:text-gray-500 mx-3 text-center">Notifications</div>
+          </NavLink>
+
+          {/* <Link href="/dashboard" className="text-black-900 hover:text-gray-500 mx-3">
+            Notifications
+          </Link> */}
+
+          </>
+
+        )}
+
       </div>
-      <div className="flex items-center text-black">
+
+      <div className="right-side flex items-center text-black">
 
         {!userId && (
           <>
@@ -35,23 +61,11 @@ const Header: React.FC<HeaderProps> = async ({ username }) => {
 
         )}
 
-        {userId && (
-          <>
-
-          <Link href="dashboard" className="text-black-900 hover:text-gray-500 mr-4">
-            Home
-          </Link>
-
-          <Link href="dashboard" className="text-black-900 hover:text-gray-500 mr-4">
-            Notifications
-          </Link>
-
+        { userId && (
+          
           <Link href="profile" className="text-black-900 hover:text-gray-500 mr-4">
             Profile
           </Link>
-
-
-          </>
 
         )}
 
