@@ -17,7 +17,7 @@ const Header: React.FC<HeaderProps> = async ({ username }) => {
       <div className="left-side flex items-center">
 
         <Link href="/">
-          <div className="text-lg font-bold text-black-900 uppercase mx-3">GoTrack</div>
+          <div className="text-lg font-bold text-black-900 uppercase mx-3 border-b-4 border-b-transparent py-4 pb-2">GoTrack</div>
         </Link>
 
         {userId && (
@@ -30,10 +30,6 @@ const Header: React.FC<HeaderProps> = async ({ username }) => {
           <NavLink href="/notifications">
             <div className="text-black-900 hover:text-gray-500 mx-3 text-center">Notifications</div>
           </NavLink>
-
-          {/* <Link href="/dashboard" className="text-black-900 hover:text-gray-500 mx-3">
-            Notifications
-          </Link> */}
 
           </>
 
