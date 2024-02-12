@@ -3,18 +3,14 @@ import GreetUser from "@/components/dashboard/GreetUser";
 import Image from 'next/image';
 import DefaultImage from "@/assets/defaultProject.png";
 import {GetOrganisationByUser} from "@/lib/UserActions";
-import {cookies} from "next/headers";
-import { getUserUUID } from "@/app/utils/UserUtils";
 
 const Dashboard = async () => {
+  
+  const currentOrganisationName = await GetOrganisationByUser(); 
 
-  const authToken = cookies().get("__session");
-
-  const useruuid: string = getUserUUID();
-
-  console.log(useruuid);
-
-  const currentOrganisationName = (await GetOrganisationByUser('1', authToken?.value)).organisationName; 
+  if (!currentOrganisationName){
+    return null;
+  }
 
   return (
       <>
@@ -27,7 +23,7 @@ const Dashboard = async () => {
           <div className="ml-5 col-span-3 ">
             <div className="header">
               <GreetUser />
-              <p>Organisation: {currentOrganisationName?currentOrganisationName:``}</p>
+              <p>Organisation: {currentOrganisationName.organisationName}</p>
             </div>
 
             <div className="user mt-8 ml-2">

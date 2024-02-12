@@ -1,7 +1,7 @@
 'use client'
 import {useUser} from "@clerk/nextjs";
 
-export function getUserUUID(): string {
+export default function getUserUUID(): string {
 
     const { user } = useUser();
 
