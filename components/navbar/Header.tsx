@@ -9,8 +9,6 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = async ({ username }) => {
   const { userId } = auth();
 
-  
-
   return (
     <nav className="flex items-center justify-between px-6 shadow-md bg-white-700">
 
