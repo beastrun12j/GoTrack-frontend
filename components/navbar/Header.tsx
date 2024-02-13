@@ -55,14 +55,6 @@ const Header: React.FC<HeaderProps> = async ({ username }) => {
 
         )}
 
-        { userId && (
-          
-          <Link href="profile" className="text-black-900 hover:text-gray-500 mr-4">
-            Profile
-          </Link>
-
-        )}
-
         <div className="ml-auto">
           <UserButton afterSignOutUrl="/" />
         </div>
