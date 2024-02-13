@@ -15,7 +15,7 @@ const Dashboard = async () => {
   return (
       <>
         <div className="main grid grid-cols-6 gap-4">
-
+  
           <div className="mr-5 col-span-2">
             <Alerts />
           </div>
