@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { FaMicrosoft, FaGithub } from "react-icons/fa";
 import Image from "next/image";
+import logoLight from "@/assets/logo-light.png";
 
 interface SignUpData {
   first_name: string;
@@ -131,7 +132,9 @@ const RegisterPage: React.FC = () => {
       className="border p-5 rounded-sm shadow-lg mb-5"
       style={{ width: "500px" }}
     >
-      <h1 className="text-2xl mb-4 text-center">GoTrack</h1>
+      <div className="flex justify-center mb-4">
+        <Image src={logoLight} alt="logo" height={200} width={200} />
+      </div>
       <p className="text-center text-black mb-4">Sign up to continue</p>
       {!pendingVerification && (
         <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
