@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { UserButton, auth } from "@clerk/nextjs";
 import NavLink from "./Nav-link";
+import logoLight from '@/assets/logo-light.png'
+import Image from "next/image";
 
 interface HeaderProps {
   username: string;
@@ -15,7 +17,9 @@ const Header: React.FC<HeaderProps> = async ({ username }) => {
       <div className="left-side flex items-center">
 
         <Link href="/">
-          <div className="text-lg font-bold text-black-900 uppercase mx-3 border-b-4 border-b-transparent py-4 pb-2">GoTrack</div>
+          <div className="text-lg font-bold text-black-900 uppercase mx-3 border-b-4 border-b-transparent py-4 pb-2">
+            <Image src={logoLight} alt="logo" width={120} height={120} />
+          </div>
         </Link>
 
         {userId && (
