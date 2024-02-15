@@ -18,16 +18,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const { isSignedIn, user, isLoaded } = useUser();
-
+  
   return (
     <ClerkProvider publishableKey={publishableKey}>
       <html lang="en">
         <body className={inter.className}>
           <Header username={"Guest"}/>
-          <main className="container">
-            <div className="flex items-start justify-center min-h-screen">
-              <div className="mt-20">{children}</div>
+          <main>
+            <div className="min-h-screen">
+              <div className="mt-10">{children}</div>
             </div>
           </main>
         </body>

@@ -13,7 +13,7 @@ const NavLink: React.FC<NavLinkProps> = ({ href, children }) => {
     const pathname = usePathname();
 
     return (
-        <Link href={href} className={pathname.startsWith(href)?`border-b-4 border-b-blue-500 py-4 pb-2 mb-1`:`border-b-4 border-b-transparent py-4 pb-2`} >{children}</Link>
+        <Link href={href} className={pathname.startsWith(href)?`text-blue-500 md:border-b-4 md:border-b-blue-500 py-4 pb-2 mb-1`:`md:border-b-4 md:border-b-transparent py-4 pb-2`} >{children}</Link>
     );
 };
 
