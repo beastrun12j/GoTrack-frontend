@@ -70,7 +70,7 @@ const RegisterPage: React.FC = () => {
       }
       if (completeSignUp.status === "complete") {
         await setActive({ session: completeSignUp.createdSessionId });
-        router.push("/");
+        // router.push("/");
       }
     } catch (err) {
       console.error(JSON.stringify(err, null, 2));
