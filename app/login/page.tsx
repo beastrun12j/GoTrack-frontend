@@ -10,12 +10,38 @@ import leftAuthIcon from "@/assets/auth-icon-1.png";
 import rightAuthIcon from "@/assets/auth-icon-2.png";
 import footerIcon from "@/assets/logo-bw.png";
 
+interface LoginData {
+  identifier: string;
+  password: string;
+}
+
 export default function LoginPage() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const { isLoaded, signIn, setActive } = useSignIn();
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!isLoaded) {
+      return;
+    }
+
+    try {
+      const loginData: LoginData = {
+        identifier: email,
+        password: password,
+      };
+
+      const completeSignIn = await signIn.create(loginData);
+
+      if (completeSignIn.status === "complete") {
+        await setActive({ session: completeSignIn.createdSessionId });
+        router.push("/dashboard");
+      }
+    } catch (err: any) {
+      console.error(JSON.stringify(err, null, 2));
+    }
   };
 
   return (
