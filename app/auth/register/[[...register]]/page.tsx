@@ -8,6 +8,7 @@ import Image from "next/image";
 import logoLight from "@/assets/logo-light.png";
 import leftAuthIcon from "@/assets/auth-icon-1.png";
 import rightAuthIcon from "@/assets/auth-icon-2.png";
+import Link from "next/link";
 
 interface SignUpData {
   first_name: string;
@@ -153,6 +154,14 @@ const RegisterPage: React.FC = () => {
             >
               Continue
             </button>
+            <div className="flex justify-start items-center">
+              <p style={{ fontSize: "12px" }}>
+                Already have an account? &nbsp;
+                <Link className="hover:underline text-theme" href="/auth/login">
+                  Login Here
+                </Link>
+              </p>
+            </div>
             <p className="text-center text-gray-600 mb-4">Or Continue with:</p>
             <SignInOAuthButtons />
             {/* <div className="flex flex-col justify-center items-center my-2">
@@ -185,6 +194,7 @@ const RegisterPage: React.FC = () => {
           </div>
         )}
       </div>
+      
       <div className="hidden md:flex items-start justify-center pr-4">
         <Image src={rightAuthIcon} alt="auth-icon" />
       </div>
