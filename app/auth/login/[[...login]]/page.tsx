@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useSignIn } from "@clerk/nextjs";
+import { useSignIn, useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import SignInOAuthButtons from "@/components/auth/OAuthButtons";
 import Image from "next/image";
@@ -9,6 +9,8 @@ import logoLight from "@/assets/logo-light.png";
 import leftAuthIcon from "@/assets/auth-icon-1.png";
 import rightAuthIcon from "@/assets/auth-icon-2.png";
 import footerIcon from "@/assets/logo-bw.png";
+import Link from "next/link";
+import { navigate } from "@/lib/UserActions";
 
 interface LoginData {
   identifier: string;
@@ -19,6 +21,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const { isLoaded, signIn, setActive } = useSignIn();
+  const { isSignedIn } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -82,10 +85,26 @@ export default function LoginPage() {
           </div>
           <button
             type="submit"
-            className="w-full text-white bg-theme hover:bg-blue-700 font-medium rounded-sm text-sm px-5 py-2.5 text-center"
+            className="w-full text-white bg-theme hover:bg-blue-700 font-medium rounded-sm text-sm px-5 py-2.5 text-center mb-3"
           >
             Continue
           </button>
+          <div className="flex justify-center items-center">
+            <p style={{ fontSize: "12px" }}>
+              <Link className="hover:underline text-theme" href="/auth/register">
+                Create an account
+              </Link>
+            </p>
+            <p style={{ fontSize: "12px" }}>&nbsp; &middot; &nbsp;</p>
+            <p style={{ fontSize: "12px" }}>
+              <Link
+                className="hover:underline text-theme"
+                href="/auth/forgot-password"
+              >
+                Forgot Password?
+              </Link>
+            </p>
+          </div>
           <p className="text-center text-gray-600 mb-4">Or Continue with:</p>
           <SignInOAuthButtons />
           <div className="flex flex-col justify-center items-center my-2">

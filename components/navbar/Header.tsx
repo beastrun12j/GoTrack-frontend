@@ -93,18 +93,9 @@ const Header: React.FC<HeaderProps> = ({ username }) => {
       <div className="right-side flex items-center text-black">
         {!user && (
           <>
-            <Link
-              href="sign-in"
-              className="text-black-900 hover:text-blue-600 mr-4"
-            >
-              Sign In
-            </Link>
-            <Link
-              href="sign-up"
-              className="text-black-900 hover:text-blue-600 mr-4"
-            >
-              Sign Up
-            </Link>
+            <button className="text-white bg-theme hover:bg-blue-700 font-medium rounded-sm text-sm px-5 py-2.5 text-center">
+              <Link href="/auth/login">Login</Link>
+            </button>
           </>
         )}
 
