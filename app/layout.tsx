@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ClerkProvider, useUser } from "@clerk/nextjs";
+import { ClerkProvider, SignedOut, RedirectToSignIn } from "@clerk/nextjs";
+
 import "./globals.css";
 import Header from "@/components/navbar/Header";
 
@@ -18,12 +19,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
   return (
     <ClerkProvider publishableKey={publishableKey}>
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
       <html lang="en">
         <body className={inter.className}>
-          <Header username={"Guest"}/>
+          <Header username={"Guest"} />
           <main>
             <div className="min-h-screen">
               <div className="mt-10">{children}</div>
