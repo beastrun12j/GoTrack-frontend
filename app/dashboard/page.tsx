@@ -19,6 +19,8 @@ const Dashboard = async () => {
     currentOrganisationName.organisationId
   );
 
+  console.log(projects);
+
   return (
     <>
       <div className="main flex justify-center mt-20 px-10">
@@ -36,7 +38,7 @@ const Dashboard = async () => {
             <h2 className="text-xl font-bold mb-5">Your Projects</h2>
 
             <div className="Projects grid grid-cols-2 md:grid-cols-4 gap-4">
-              {projects?.map((project: Project, projectid: number) => (
+              {projects && projects?.map((project: Project, projectid: number) => (
                 <div
                   key={projectid}
                   className="project m-5 p-2 text-center flex flex-col items-center hover:bg-sky-100"
@@ -52,6 +54,8 @@ const Dashboard = async () => {
                   </button>
                 </div>
               ))}
+
+              
 
               {/* <div className="project m-5 p-2 text-center flex flex-col items-center">
                     <button className="cursor-pointer hover:bg-sky-100">

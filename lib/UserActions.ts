@@ -47,6 +47,10 @@ export async function GetProjectsForUserOrganisation(
       },
     }
   );
+  
+  if (response.status === 400) {
+    return undefined;
+  }
 
   const projects = await response.json();
 
