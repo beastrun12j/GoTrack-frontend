@@ -101,6 +101,7 @@ const RegisterPage: React.FC = () => {
                 onChange={(e) => setFirstName(e.target.value)}
                 placeholder="Enter first name"
                 className="bg-white border border-theme text-gray-800 sm:text-sm rounded-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                value={firstName}
                 required
               />
             </div>
@@ -112,6 +113,7 @@ const RegisterPage: React.FC = () => {
                 onChange={(e) => setLastName(e.target.value)}
                 placeholder="Enter last name"
                 className="bg-white border border-theme text-gray-800 sm:text-sm rounded-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                value={lastName}
                 required
               />
             </div>
@@ -123,6 +125,7 @@ const RegisterPage: React.FC = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter email address"
                 className="bg-white border border-theme text-gray-800 sm:text-sm rounded-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                value={email}
                 required
               />
             </div>
@@ -134,6 +137,7 @@ const RegisterPage: React.FC = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter password"
                 className="bg-white border border-theme text-gray-800 sm:text-sm rounded-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                value={password}
                 required
               />
             </div>
@@ -145,6 +149,7 @@ const RegisterPage: React.FC = () => {
                 onChange={(e) => setPasswordAgain(e.target.value)}
                 placeholder="Enter password again"
                 className="bg-white border border-theme text-gray-800 sm:text-sm rounded-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                value={passwordAgain}
                 required
               />
             </div>
