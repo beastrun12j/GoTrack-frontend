@@ -20,6 +20,7 @@ export default function SignInOAuthButtons() {
     <div>
       <button
         onClick={() => signInWith("oauth_google")}
+        type="button"
         className="w-full mb-3 text-gray-800 hover:bg-blue-100 font-medium text-center rounded-sm px-5 py-1.5 text-base border-2 border-theme"
       >
         <div className="flex items-center justify-center">
@@ -29,6 +30,7 @@ export default function SignInOAuthButtons() {
       </button>
       <button
         onClick={() => signInWith("oauth_microsoft")}
+        type="button"
         className="w-full mb-3 text-gray-800 hover:bg-blue-100 font-medium rounded-sm px-5 py-1 text-base text-center border-2 border-theme"
       >
         <div className="flex items-center justify-center">
@@ -45,6 +47,7 @@ export default function SignInOAuthButtons() {
       </button>
       <button
         onClick={() => signInWith("oauth_github")}
+        type="button"
         className="w-full mb-3 text-gray-800 hover:bg-blue-100 font-medium rounded-sm text-base px-5 py-1.5 text-center border-2 border-theme"
       >
         <div className="flex items-center justify-center">
