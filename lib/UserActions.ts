@@ -15,8 +15,7 @@ export async function GetOrganisationByUser(): Promise<
     return undefined;
   }
 
-  // const response = await fetch(`http://localhost:8080/organisations/${auth.userId}`, {
-  const response = await fetch(`http://localhost:8080/api/organisations/2`, {
+  const response = await fetch(`http://localhost:8080/api/organisations/1`, {
     headers: {
       authorization: `Bearer ${auth.token}`,
     },
