@@ -15,16 +15,15 @@ export async function GetOrganisationByUser(): Promise<
     return undefined;
   }
 
-  // const response = await fetch(`http://localhost:8080/organisations/${auth.userId}`, {
-  const response = await fetch(`http://localhost:8080/api/organisations/2`, {
+  const response = await fetch(`http://localhost:8080/api/users/${auth.userId}/organisations`, {
     headers: {
       authorization: `Bearer ${auth.token}`,
     },
   });
 
-  const organisation: Organisation = await response.json();
+  const organisation: Organisation[] = await response.json();
 
-  return organisation;
+  return organisation[0];
 }
 
 export async function GetProjectsForUserOrganisation(
@@ -47,7 +46,7 @@ export async function GetProjectsForUserOrganisation(
       },
     }
   );
-  
+
   if (response.status === 400) {
     return undefined;
   }
