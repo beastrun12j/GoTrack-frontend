@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useSignIn, useAuth } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
+import { useSignIn } from "@clerk/nextjs";
 import SignInOAuthButtons from "@/components/auth/OAuthButtons";
 import Image from "next/image";
 import logoLight from "@/assets/logo-light.png";
@@ -10,7 +9,8 @@ import leftAuthIcon from "@/assets/auth-icon-1.png";
 import rightAuthIcon from "@/assets/auth-icon-2.png";
 import footerIcon from "@/assets/logo-bw.png";
 import Link from "next/link";
-import { navigate } from "@/lib/UserActions";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 interface LoginData {
   identifier: string;
@@ -18,32 +18,39 @@ interface LoginData {
 }
 
 export default function LoginPage() {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<LoginData>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const { isLoaded, signIn, setActive } = useSignIn();
-  const { isSignedIn } = useAuth();
-  const router = useRouter();
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const [error, setError] = useState<string | null>(null);
+  const submitHandler: SubmitHandler<LoginData> = async (data: any) => {
     if (!isLoaded) {
       return;
     }
 
     try {
+      setIsLoading(true);
       const loginData: LoginData = {
-        identifier: email,
-        password: password,
+        identifier: data.identifier,
+        password: data.password,
       };
 
       const completeSignIn = await signIn.create(loginData);
 
       if (completeSignIn.status === "complete") {
         await setActive({ session: completeSignIn.createdSessionId });
-        router.push("/dashboard");
+        reset();
+        setError(null);
       }
     } catch (err: any) {
-      console.error(JSON.stringify(err, null, 2));
+      setError(err.errors[0].message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -60,38 +67,80 @@ export default function LoginPage() {
           <Image src={logoLight} alt="logo" height={200} width={200} />
         </div>
         <p className="text-center text-black mb-4">Login to continue</p>
-        <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+        <form
+          onSubmit={handleSubmit(submitHandler)}
+          className="space-y-4 md:space-y-6"
+        >
           <div>
             <input
               type="email"
-              name="email"
-              id="email"
-              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter email address"
               className="bg-white border border-theme text-gray-800 sm:text-sm rounded-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-              required
+              aria-invalid={errors.identifier ? "true" : "false"}
+              {...register("identifier", {
+                required: "Email is required.",
+                pattern: {
+                  value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                  message: "Please enter a valid email",
+                },
+              })}
+              onChange={() => setError(null)}
             />
+            {errors.identifier && (
+              <span role="alert" className="text-red-700 text-sm">
+                {errors.identifier.message}
+              </span>
+            )}
           </div>
           <div>
             <input
-              type="password"
-              name="password"
-              id="password"
-              onChange={(e) => setPassword(e.target.value)}
+              type={showPassword ? "text" : "password"}
               placeholder="Enter password"
               className="bg-white border border-theme text-gray-800 sm:text-sm rounded-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-              required
+              aria-invalid={errors.password ? "true" : "false"}
+              {...register("password", { required: "Password is required" })}
+              onChange={() => setError(null)}
             />
+            {/* <span
+              style={{
+                position: "relative",
+                cursor: "pointer",
+                top: "-30px",
+                left: "430px",
+              }}
+              onClick={() => setShowPassword(!showPassword)}
+            >{showPassword ? <FaEyeSlash /> : <FaEye />}</span> */}
+            <input
+              type="checkbox"
+              onClick={() => setShowPassword(!showPassword)}
+            />
+            <span style={{ fontSize: "12px" }} className="ml-2">
+              Show Password
+            </span>
           </div>
+          {errors.password && (
+            <span role="alert" className="text-red-700 text-sm">
+              {errors.password.message}
+            </span>
+          )}
           <button
             type="submit"
             className="w-full text-white bg-theme hover:bg-blue-700 font-medium rounded-sm text-sm px-5 py-2.5 text-center mb-3"
+            disabled={isLoading}
           >
-            Continue
+            {isLoading ? "Loading..." : "Continue"}
           </button>
+          {error && (
+            <div role="alert" className="text-red-700 text-sm text-center">
+              {error}
+            </div>
+          )}
           <div className="flex justify-center items-center">
             <p style={{ fontSize: "12px" }}>
-              <Link className="hover:underline text-theme" href="/auth/register">
+              <Link
+                className="hover:underline text-theme"
+                href="/auth/register"
+              >
                 Create an account
               </Link>
             </p>
