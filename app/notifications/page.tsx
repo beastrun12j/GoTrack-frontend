@@ -1,4 +1,6 @@
 import NotificationNav from "@/components/notifications/Notification-nav";
+import Image from "next/image";
+import NotificationIcon from "@/assets/notificationLogo.svg"
 
 const Notifications = () => {
   return (
@@ -9,9 +11,9 @@ const Notifications = () => {
 
         <div className="flex justify-center items-center w-full">
 
-          <div className="w-1/6 image border-2 border-blue-300 p-4 m-4">
+          <div className="w-1/6  p-4 m-4">
 
-            <h1>Image</h1>
+            <Image src={NotificationIcon} alt="logo" />
 
           </div>
 
