@@ -8,6 +8,8 @@ import { CiStar } from "react-icons/ci";
 import { IoIosDoneAll } from "react-icons/io";
 import { MdOutlineDone } from "react-icons/md";
 
+import { ScrollArea } from "@/components/ui/scroll-area";
+
 export default function NotificationNav() {
   const dummyNotifications = [
     {
@@ -20,7 +22,7 @@ export default function NotificationNav() {
       isStared: true,
       isCleared: false,
       type: "direct",
-      time: "2 minutes ago",
+      time: "2 mins ago",
       logo: defaultUserIcon,
     },
     {
@@ -96,314 +98,317 @@ export default function NotificationNav() {
           <TabsTrigger value="Starred">Starred</TabsTrigger>
           <TabsTrigger value="Cleared">Cleared</TabsTrigger>
         </TabsList>
-        <TabsContent value="Direct">
-          <div className="m-2">
-            <div className="box">
-              <div className="flex justify-between items-center p-2">
-                <p className="text-lg font-bold">Latest</p>
-                <p className="text-sm text-sky-500 flex items-center">
-                  {" "}
-                  <IoIosDoneAll size={25} /> Mark all as read
-                </p>
-              </div>
-              <div className="p-2">
-                {dummyNotifications.map((notification, index) => {
-                  return (
-                    notification.type === "direct" && (
-                      <div
-                        key={index}
-                        className="m-2 p-4 shadow-lg flex justify-between w-full"
-                      >
-                        <div className="flex w-full justify-start items-center">
-                          <div>
-                            <Image
-                              src={notification.logo}
-                              alt="user"
-                              className="w-10 h-10 rounded-full"
-                            />
-                          </div>
-                          <div className="mx-2">
-                            <div className="flex items-center">
-                              <p className="text-lg font-bold mr-2">
-                                {notification.title}
-                              </p>
-                              <div>
-                                <p className="text-xs">{notification.time}</p>
+
+        <ScrollArea className="h-[450px] w-full p-2">
+          <TabsContent value="Direct">
+            <div className="m-2">
+              <div className="box">
+                <div className="flex justify-between items-center p-2">
+                  <p className="text-lg font-bold pl-2">Latest</p>
+                  <p className="text-sm text-sky-500 flex items-center">
+                    {" "}
+                    <IoIosDoneAll size={25} /> Mark all as read
+                  </p>
+                </div>
+                <div className="p-2">
+                  {dummyNotifications.map((notification, index) => {
+                    return (
+                      notification.type === "direct" && (
+                        <div
+                          key={index}
+                          className="sm:m-2 p-4 shadow-lg flex flex-col sm:flex-row  justify-between w-full"
+                        >
+                          <div className="flex w-full justify-start items-center">
+                            <div className="hidden sm:block">
+                              <Image
+                                src={notification.logo}
+                                alt="user"
+                                className="w-10 h-10 rounded-full"
+                              />
+                            </div>
+                            <div className="mx-2">
+                              <div className="flex items-center">
+                                <p className="text-lg font-bold mr-2">
+                                  {notification.title}
+                                </p>
+                                <div>
+                                  <p className="text-xs">{notification.time}</p>
+                                </div>
                               </div>
-                            </div>
-                            <p
-                              className={`text-xs font-bold my-1 ${
-                                notification.priority === "High"
-                                  ? "text-amber-600"
-                                  : notification.priority === "Urgent"
-                                  ? "text-red-600"
-                                  : notification.priority === "Normal"
-                                  ? "text-blue-600"
-                                  : notification.priority === "Low"
-                                  ? "text-green-500"
-                                  : "text-slate-500"
-                              }`}
-                            >
-                              {notification.priority}
-                            </p>
-
-                            <div className="flex items-center text-xs">
-                              <p className="font-bold">
-                                {notification.projectName} &nbsp;
+                              <p
+                                className={`text-xs font-bold my-1 ${
+                                  notification.priority === "High"
+                                    ? "text-amber-600"
+                                    : notification.priority === "Urgent"
+                                    ? "text-red-600"
+                                    : notification.priority === "Normal"
+                                    ? "text-blue-600"
+                                    : notification.priority === "Low"
+                                    ? "text-green-500"
+                                    : "text-slate-500"
+                                }`}
+                              >
+                                {notification.priority}
                               </p>
-                              <p>&middot;</p>
-                              <p>&nbsp; {notification.status}</p>
-                            </div>
 
-                            <p className="text-sm my-1">
-                              {notification.description}
-                            </p>
+                              <div className="flex items-center text-xs">
+                                <p className="font-bold">
+                                  {notification.projectName} &nbsp;
+                                </p>
+                                <p>&middot;</p>
+                                <p>&nbsp; {notification.status}</p>
+                              </div>
+
+                              <p className="text-sm my-1">
+                                {notification.description}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center">
+                            <CiStar size={20} className="mx-2" color="blue" />
+                            <MdOutlineDone size={20} color="lightgreen" />
                           </div>
                         </div>
-
-                        <div className="flex items-center">
-                          <CiStar size={20} className="mx-2" color="blue" />
-                          <MdOutlineDone size={20} color="lightgreen" />
-                        </div>
-                      </div>
-                    )
-                  );
-                })}
+                      )
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
-        </TabsContent>
-        <TabsContent value="Watching">
-          <div className="m-2">
-            <div className="box">
-              <div className="flex justify-between items-center p-2">
-                <p className="text-lg font-bold">Latest</p>
-                <p className="text-sm text-sky-500 flex items-center">
-                  {" "}
-                  <IoIosDoneAll size={25} /> Mark all as read
-                </p>
-              </div>
-              <div className="p-2">
-                {dummyNotifications.map((notification, index) => {
-                  return (
-                    notification.type === "Watching" && (
-                      <div
-                        key={index}
-                        className="m-2 p-4 shadow-lg flex justify-between w-full"
-                      >
-                        <div className="flex w-full justify-start items-center">
-                          <div>
-                            <Image
-                              src={notification.logo}
-                              alt="user"
-                              className="w-10 h-10 rounded-full"
-                            />
-                          </div>
-                          <div className="mx-2">
-                            <div className="flex items-center">
-                              <p className="text-lg font-bold mr-2">
-                                {notification.title}
-                              </p>
-                              <div>
-                                <p className="text-xs">{notification.time}</p>
+          </TabsContent>
+          <TabsContent value="Watching">
+            <div className="m-2">
+              <div className="box">
+                <div className="flex justify-between items-center p-2">
+                  <p className="text-lg font-bold">Latest</p>
+                  <p className="text-sm text-sky-500 flex items-center">
+                    {" "}
+                    <IoIosDoneAll size={25} /> Mark all as read
+                  </p>
+                </div>
+                <div className="p-2">
+                  {dummyNotifications.map((notification, index) => {
+                    return (
+                      notification.type === "Watching" && (
+                        <div
+                          key={index}
+                          className="m-2 p-4 shadow-lg flex justify-between w-full"
+                        >
+                          <div className="flex w-full justify-start items-center">
+                            <div>
+                              <Image
+                                src={notification.logo}
+                                alt="user"
+                                className="w-10 h-10 rounded-full"
+                              />
+                            </div>
+                            <div className="mx-2">
+                              <div className="flex items-center">
+                                <p className="text-lg font-bold mr-2">
+                                  {notification.title}
+                                </p>
+                                <div>
+                                  <p className="text-xs">{notification.time}</p>
+                                </div>
                               </div>
-                            </div>
-                            <p
-                              className={`text-xs font-bold my-1 ${
-                                notification.priority === "High"
-                                  ? "text-amber-600"
-                                  : notification.priority === "Urgent"
-                                  ? "text-red-600"
-                                  : notification.priority === "Normal"
-                                  ? "text-blue-600"
-                                  : notification.priority === "Low"
-                                  ? "text-green-500"
-                                  : "text-slate-500"
-                              }`}
-                            >
-                              {notification.priority}
-                            </p>
-
-                            <div className="flex items-center text-xs">
-                              <p className="font-bold">
-                                {notification.projectName} &nbsp;
+                              <p
+                                className={`text-xs font-bold my-1 ${
+                                  notification.priority === "High"
+                                    ? "text-amber-600"
+                                    : notification.priority === "Urgent"
+                                    ? "text-red-600"
+                                    : notification.priority === "Normal"
+                                    ? "text-blue-600"
+                                    : notification.priority === "Low"
+                                    ? "text-green-500"
+                                    : "text-slate-500"
+                                }`}
+                              >
+                                {notification.priority}
                               </p>
-                              <p>&middot;</p>
-                              <p>&nbsp; {notification.status}</p>
-                            </div>
 
-                            <p className="text-sm my-1">
-                              {notification.description}
-                            </p>
+                              <div className="flex items-center text-xs">
+                                <p className="font-bold">
+                                  {notification.projectName} &nbsp;
+                                </p>
+                                <p>&middot;</p>
+                                <p>&nbsp; {notification.status}</p>
+                              </div>
+
+                              <p className="text-sm my-1">
+                                {notification.description}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center">
+                            <CiStar size={20} className="mx-2" color="blue" />
+                            <MdOutlineDone size={20} color="lightgreen" />
                           </div>
                         </div>
-
-                        <div className="flex items-center">
-                          <CiStar size={20} className="mx-2" color="blue" />
-                          <MdOutlineDone size={20} color="lightgreen" />
-                        </div>
-                      </div>
-                    )
-                  );
-                })}
+                      )
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
-        </TabsContent>
-        <TabsContent value="Starred">
-          <div className="m-2">
-            <div className="box">
-              <div className="flex justify-between items-center p-2">
-                <p className="text-lg font-bold">Latest</p>
-                <p className="text-sm text-sky-500 flex items-center">
-                  {" "}
-                  <IoIosDoneAll size={25} /> Mark all as read
-                </p>
-              </div>
-              <div className="p-2">
-                {dummyNotifications.map((notification, index) => {
-                  return (
-                    notification.isStared && (
-                      <div
-                        key={index}
-                        className="m-2 p-4 shadow-lg flex justify-between w-full"
-                      >
-                        <div className="flex w-full justify-start items-center">
-                          <div>
-                            <Image
-                              src={notification.logo}
-                              alt="user"
-                              className="w-10 h-10 rounded-full"
-                            />
-                          </div>
-                          <div className="mx-2">
-                            <div className="flex items-center">
-                              <p className="text-lg font-bold mr-2">
-                                {notification.title}
-                              </p>
-                              <div>
-                                <p className="text-xs">{notification.time}</p>
+          </TabsContent>
+          <TabsContent value="Starred">
+            <div className="m-2">
+              <div className="box">
+                <div className="flex justify-between items-center p-2">
+                  <p className="text-lg font-bold">Latest</p>
+                  <p className="text-sm text-sky-500 flex items-center">
+                    {" "}
+                    <IoIosDoneAll size={25} /> Mark all as read
+                  </p>
+                </div>
+                <div className="p-2">
+                  {dummyNotifications.map((notification, index) => {
+                    return (
+                      notification.isStared && (
+                        <div
+                          key={index}
+                          className="m-2 p-4 shadow-lg flex justify-between w-full"
+                        >
+                          <div className="flex w-full justify-start items-center">
+                            <div>
+                              <Image
+                                src={notification.logo}
+                                alt="user"
+                                className="w-10 h-10 rounded-full"
+                              />
+                            </div>
+                            <div className="mx-2">
+                              <div className="flex items-center">
+                                <p className="text-lg font-bold mr-2">
+                                  {notification.title}
+                                </p>
+                                <div>
+                                  <p className="text-xs">{notification.time}</p>
+                                </div>
                               </div>
-                            </div>
-                            <p
-                              className={`text-xs font-bold my-1 ${
-                                notification.priority === "High"
-                                  ? "text-amber-600"
-                                  : notification.priority === "Urgent"
-                                  ? "text-red-600"
-                                  : notification.priority === "Normal"
-                                  ? "text-blue-600"
-                                  : notification.priority === "Low"
-                                  ? "text-green-500"
-                                  : "text-slate-500"
-                              }`}
-                            >
-                              {notification.priority}
-                            </p>
-
-                            <div className="flex items-center text-xs">
-                              <p className="font-bold">
-                                {notification.projectName} &nbsp;
+                              <p
+                                className={`text-xs font-bold my-1 ${
+                                  notification.priority === "High"
+                                    ? "text-amber-600"
+                                    : notification.priority === "Urgent"
+                                    ? "text-red-600"
+                                    : notification.priority === "Normal"
+                                    ? "text-blue-600"
+                                    : notification.priority === "Low"
+                                    ? "text-green-500"
+                                    : "text-slate-500"
+                                }`}
+                              >
+                                {notification.priority}
                               </p>
-                              <p>&middot;</p>
-                              <p>&nbsp; {notification.status}</p>
-                            </div>
 
-                            <p className="text-sm my-1">
-                              {notification.description}
-                            </p>
+                              <div className="flex items-center text-xs">
+                                <p className="font-bold">
+                                  {notification.projectName} &nbsp;
+                                </p>
+                                <p>&middot;</p>
+                                <p>&nbsp; {notification.status}</p>
+                              </div>
+
+                              <p className="text-sm my-1">
+                                {notification.description}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center">
+                            <CiStar size={20} className="mx-2" color="blue" />
+                            <MdOutlineDone size={20} color="lightgreen" />
                           </div>
                         </div>
-
-                        <div className="flex items-center">
-                          <CiStar size={20} className="mx-2" color="blue" />
-                          <MdOutlineDone size={20} color="lightgreen" />
-                        </div>
-                      </div>
-                    )
-                  );
-                })}
+                      )
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
-        </TabsContent>
-        <TabsContent value="Cleared">
-          <div className="m-2">
-            <div className="box">
-              <div className="flex justify-between items-center p-2">
-                <p className="text-lg font-bold">Latest</p>
-                <p className="text-sm text-sky-500 flex items-center">
-                  {" "}
-                  <IoIosDoneAll size={25} /> Mark all as read
-                </p>
-              </div>
-              <div className="p-2">
-                {dummyNotifications.map((notification, index) => {
-                  return (
-                    notification.isCleared && (
-                      <div
-                        key={index}
-                        className="m-2 p-4 shadow-lg flex justify-between w-full"
-                      >
-                        <div className="flex w-full justify-start items-center">
-                          <div>
-                            <Image
-                              src={notification.logo}
-                              alt="user"
-                              className="w-10 h-10 rounded-full"
-                            />
-                          </div>
-                          <div className="mx-2">
-                            <div className="flex items-center">
-                              <p className="text-lg font-bold mr-2">
-                                {notification.title}
-                              </p>
-                              <div>
-                                <p className="text-xs">{notification.time}</p>
+          </TabsContent>
+          <TabsContent value="Cleared">
+            <div className="m-2">
+              <div className="box">
+                <div className="flex justify-between items-center p-2">
+                  <p className="text-lg font-bold">Latest</p>
+                  <p className="text-sm text-sky-500 flex items-center">
+                    {" "}
+                    <IoIosDoneAll size={25} />
+                  </p>
+                </div>
+                <div className="p-2">
+                  {dummyNotifications.map((notification, index) => {
+                    return (
+                      notification.isCleared && (
+                        <div
+                          key={index}
+                          className="m-2 p-4 shadow-lg flex justify-between w-full"
+                        >
+                          <div className="flex w-full justify-start items-center">
+                            <div>
+                              <Image
+                                src={notification.logo}
+                                alt="user"
+                                className="w-10 h-10 rounded-full"
+                              />
+                            </div>
+                            <div className="mx-2">
+                              <div className="flex items-center">
+                                <p className="text-lg font-bold mr-2">
+                                  {notification.title}
+                                </p>
+                                <div>
+                                  <p className="text-xs">{notification.time}</p>
+                                </div>
                               </div>
-                            </div>
-                            <p
-                              className={`text-xs font-bold my-1 ${
-                                notification.priority === "High"
-                                  ? "text-amber-600"
-                                  : notification.priority === "Urgent"
-                                  ? "text-red-600"
-                                  : notification.priority === "Normal"
-                                  ? "text-blue-600"
-                                  : notification.priority === "Low"
-                                  ? "text-green-500"
-                                  : "text-slate-500"
-                              }`}
-                            >
-                              {notification.priority}
-                            </p>
-
-                            <div className="flex items-center text-xs">
-                              <p className="font-bold">
-                                {notification.projectName} &nbsp;
+                              <p
+                                className={`text-xs font-bold my-1 ${
+                                  notification.priority === "High"
+                                    ? "text-amber-600"
+                                    : notification.priority === "Urgent"
+                                    ? "text-red-600"
+                                    : notification.priority === "Normal"
+                                    ? "text-blue-600"
+                                    : notification.priority === "Low"
+                                    ? "text-green-500"
+                                    : "text-slate-500"
+                                }`}
+                              >
+                                {notification.priority}
                               </p>
-                              <p>&middot;</p>
-                              <p>&nbsp; {notification.status}</p>
-                            </div>
 
-                            <p className="text-sm my-1">
-                              {notification.description}
-                            </p>
+                              <div className="flex items-center text-xs">
+                                <p className="font-bold">
+                                  {notification.projectName} &nbsp;
+                                </p>
+                                <p>&middot;</p>
+                                <p>&nbsp; {notification.status}</p>
+                              </div>
+
+                              <p className="text-sm my-1">
+                                {notification.description}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center">
+                            <CiStar size={20} className="mx-2" color="blue" />
+                            <MdOutlineDone size={20} color="lightgreen" />
                           </div>
                         </div>
-
-                        <div className="flex items-center">
-                          <CiStar size={20} className="mx-2" color="blue" />
-                          <MdOutlineDone size={20} color="lightgreen" />
-                        </div>
-                      </div>
-                    )
-                  );
-                })}
+                      )
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
-        </TabsContent>
+          </TabsContent>
+        </ScrollArea>
       </Tabs>
     </>
   );
