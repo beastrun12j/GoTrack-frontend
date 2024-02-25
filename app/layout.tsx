@@ -28,7 +28,7 @@ export default function RootLayout({
         <body className={inter.className}>
           <Header username={"Guest"} />
           <main>
-            <div className="min-h-screen">
+            <div>
               <div className="mt-10">{children}</div>
             </div>
           </main>

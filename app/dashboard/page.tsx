@@ -19,7 +19,6 @@ const Dashboard = async () => {
     currentOrganisationName.organisationId
   );
 
-  console.log(projects);
 
   return (
     <>
