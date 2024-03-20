@@ -1,4 +1,4 @@
-interface Organisation {
+type Organisation = {
     organisationId: number;
     organisationName: string;
     organisationType: boolean;
