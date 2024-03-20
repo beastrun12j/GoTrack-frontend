@@ -1,14 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import { useAuth, useSignIn } from "@clerk/nextjs";
-import type { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import logoLight from "@/assets/logo-light.png";
 import leftAuthIcon from "@/assets/auth-icon-1.png";
 import rightAuthIcon from "@/assets/auth-icon-2.png";
 import footerIcon from "@/assets/logo-bw.png";
-import Link from "next/link";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");

@@ -28,6 +28,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const { isLoaded, signIn, setActive } = useSignIn();
   const [error, setError] = useState<string | null>(null);
+
   const submitHandler: SubmitHandler<LoginData> = async (data: any) => {
     if (!isLoaded) {
       return;

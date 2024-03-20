@@ -1,21 +1,17 @@
-import {cookies} from "next/headers";
-import { auth } from '@clerk/nextjs';
-
+import { cookies } from "next/headers";
+import { auth } from "@clerk/nextjs";
 
 export function getAuth() {
-    
-    const authToken = cookies().get("__session");
+  const authToken = cookies().get("__session");
 
+  const { userId } = auth();
 
-    const { userId } = auth();
+  if (!userId || !authToken) {
+    return undefined;
+  }
 
-    if (!userId || !authToken){
-        return undefined
-    }
-
-    return {
-        token : authToken.value,
-        userId : userId
-    }
-
+  return {
+    token: authToken.value,
+    userId: userId,
+  };
 }

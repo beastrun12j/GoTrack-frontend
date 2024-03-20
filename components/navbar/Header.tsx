@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { UserButton, auth, useUser } from "@clerk/nextjs";
+import { UserButton, useUser } from "@clerk/nextjs";
 import NavLink from "./Nav-link";
 import logoLight from "@/assets/logo-light.png";
 import Image from "next/image";
@@ -15,12 +15,7 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 
-interface HeaderProps {
-  username: string;
-}
-
-const Header: React.FC<HeaderProps> = ({ username }) => {
-  // const { userId } = auth()
+export default function Header() {
   const { user } = useUser();
 
   return (
@@ -105,6 +100,4 @@ const Header: React.FC<HeaderProps> = ({ username }) => {
       </div>
     </nav>
   );
-};
-
-export default Header;
+}
