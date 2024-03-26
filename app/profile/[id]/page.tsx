@@ -24,6 +24,21 @@ const getOrganisationsByUser = async (id: string) => {
   return response.json();
 };
 
+const getUserDesignation = async (id: number) => {
+  const auth = getAuth();
+  if (!auth) return undefined;
+
+  const response = await fetch(
+    `${process.env.BACKEND_BASE_URL}/api/users/designation/${id}`,
+    {
+      headers: {
+        authorization: `Bearer ${auth.token}`,
+      },
+    }
+  );
+  return response.json();
+};
+
 const getUserData = async (id: string) => {
   const auth = getAuth();
   if (!auth) return undefined;
@@ -50,9 +65,10 @@ export default async function UserProfile({
 }) {
   try {
     const userData: User = await getUserData(params.id);
+    const userDesignation = await getUserDesignation(userData.designationId);
     const userOrganisations = await getOrganisationsByUser(params.id);
-    let currentOrganisation;
 
+    let currentOrganisation;
     if (userOrganisations !== null) {
       currentOrganisation = userOrganisations[0];
     }
@@ -65,7 +81,7 @@ export default async function UserProfile({
             backgroundImage: `url(${coverImage.src})`,
           }}
         ></div>
-        <div className="px-24">
+        <div className="px-36">
           <div className="flex justify-center md:justify-start">
             <Image
               className="h-36 w-36 rounded-full border-4 border-white -mt-24 mr-4 bg-gray-200"
@@ -94,7 +110,7 @@ export default async function UserProfile({
               <div className="flex mt-5 mb-4">
                 <MdBusinessCenter color="gray" />
                 <p className="md:text-xs text-sm text-gray-500 mx-2">
-                  {userData.designationId || "Software Developer"}
+                  {userDesignation.designation || "Behn ke lode"}
                 </p>
               </div>
               <div className="flex mb-4">
