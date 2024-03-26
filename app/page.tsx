@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 export default function Home() {
   return (
     <>
-      <div className="flex items-center justify-center flex-col container">
+      <div className="flex items-center justify-center flex-col container mt-20">
         <div className="flex items-center justify-center flex-col mt-20">
           <h1 className="text-3xl md:text-5xl lg:text-6xl text-center text-neutral-800 mb-6">
             Unleash your team's potential
@@ -23,7 +23,7 @@ export default function Home() {
           <Link href="/register">Get GoTrack for free</Link>
         </Button>
       </div>
-      <Footer /> 
+      <Footer />
     </>
   );
 }

@@ -1,13 +1,12 @@
 import coverImage from "@/assets/default-profile-cover-image.png";
-import profileImage from "@/assets/default-user-profile-image.png";
-import { Button } from "@/components/ui/button";
 import { MdBusinessCenter, MdOutlineAlternateEmail } from "react-icons/md";
 import { IoIosBusiness } from "react-icons/io";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaCheckSquare } from "react-icons/fa";
-import Image from "next/image";
 import { getAuth } from "@/utils/AuthUtils";
 import User from "@/types/User";
+import ProfileImage from "@/components/profile/profileImage";
+import ManageProfile from "@/components/profile/manageProfile";
 
 const getOrganisationsByUser = async (id: string) => {
   const auth = getAuth();
@@ -81,28 +80,15 @@ export default async function UserProfile({
             backgroundImage: `url(${coverImage.src})`,
           }}
         ></div>
-        <div className="px-36">
-          <div className="flex justify-center md:justify-start">
-            <Image
-              className="h-36 w-36 rounded-full border-4 border-white -mt-24 mr-4 bg-gray-200"
-              style={{ objectFit: "cover" }}
-              src={profileImage}
-              quality={100}
-              alt=""
-            />
-          </div>
+        <div className="md:w-4/12 lg:w-3/12 w-full lg:mx-12">
+          <ProfileImage />
         </div>
         <div className="flex md:flex-row flex-col container mt-6">
           <div className="flex flex-col md:w-4/12 lg:w-3/12 w-full">
             <h1 className="text-xl text-center">
               {userData.firstName + " " + userData.lastName}
             </h1>
-            <Button
-              className="my-5 px-10 bg-gray-200 hover:bg-gray-300 rounded-sm text-black text-xs"
-              style={{}}
-            >
-              Manage your account
-            </Button>
+            <ManageProfile />
             <div className="flex flex-col mx-8 my-2">
               <h2 className="text-xs uppercase text-gray-500" style={{}}>
                 About
@@ -110,7 +96,7 @@ export default async function UserProfile({
               <div className="flex mt-5 mb-4">
                 <MdBusinessCenter color="gray" />
                 <p className="md:text-xs text-sm text-gray-500 mx-2">
-                  {userDesignation.designation || "Behn ke lode"}
+                  {userDesignation.designation || "Designation not found"}
                 </p>
               </div>
               <div className="flex mb-4">
@@ -123,7 +109,7 @@ export default async function UserProfile({
               </div>
               <div className="flex mb-4">
                 <FaLocationDot color="gray" />
-                <p className="md:text-xs text-sm text-gray-500 mx-2">
+                <p className="md:text-xs text-sm text-gray-500 mx-2 capitalize">
                   {userData.location || "New Delhi, India"}
                 </p>
               </div>
@@ -152,11 +138,13 @@ export default async function UserProfile({
                   <h3 className="text-xs font-semibold">
                     List Competitor Apps
                   </h3>
-                  <div className="flex my-1">
-                    <p className="text-xs text-gray-500 mr-1">
+                  <div className="flex sm:flex-row flex-col justify-between my-1">
+                    <p className="text-xs text-gray-500 font-semibold mr-1">
                       Chori ka Backend
                     </p>
-                    <p className="text-xs text-gray-500 mr-1">&middot;</p>
+                    <p className="text-xs sm:block hidden text-gray-500 mr-1">
+                      &middot;
+                    </p>
                     <p className="text-xs text-gray-500">
                       You commented here today
                     </p>
@@ -169,11 +157,13 @@ export default async function UserProfile({
                   <h3 className="text-xs font-semibold">
                     List Competitor Apps
                   </h3>
-                  <div className="flex my-1">
-                    <p className="text-xs text-gray-500 mr-1">
+                  <div className="flex sm:flex-row flex-col justify-between my-1">
+                    <p className="text-xs text-gray-500 font-semibold mr-1">
                       Chori ka Backend
                     </p>
-                    <p className="text-xs text-gray-500 mr-1">&middot;</p>
+                    <p className="text-xs sm:block hidden text-gray-500 mr-1">
+                      &middot;
+                    </p>
                     <p className="text-xs text-gray-500">
                       You commented here today
                     </p>
@@ -186,11 +176,13 @@ export default async function UserProfile({
                   <h3 className="text-xs font-semibold">
                     List Competitor Apps
                   </h3>
-                  <div className="flex my-1">
-                    <p className="text-xs text-gray-500 mr-1">
+                  <div className="flex sm:flex-row flex-col justify-between my-1">
+                    <p className="text-xs text-gray-500 font-semibold mr-1">
                       Chori ka Backend
                     </p>
-                    <p className="text-xs text-gray-500 mr-1">&middot;</p>
+                    <p className="text-xs sm:block hidden text-gray-500 mr-1">
+                      &middot;
+                    </p>
                     <p className="text-xs text-gray-500">
                       You commented here today
                     </p>
@@ -203,11 +195,13 @@ export default async function UserProfile({
                   <h3 className="text-xs font-semibold">
                     List Competitor Apps
                   </h3>
-                  <div className="flex my-1">
-                    <p className="text-xs text-gray-500 mr-1">
+                  <div className="flex sm:flex-row flex-col justify-between my-1">
+                    <p className="text-xs text-gray-500 font-semibold mr-1">
                       Chori ka Backend
                     </p>
-                    <p className="text-xs text-gray-500 mr-1">&middot;</p>
+                    <p className="text-xs sm:block hidden text-gray-500 mr-1">
+                      &middot;
+                    </p>
                     <p className="text-xs text-gray-500">
                       You commented here today
                     </p>

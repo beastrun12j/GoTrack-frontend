@@ -5,7 +5,7 @@ import NotificationIcon from "@/assets/notificationLogo.svg";
 const Notifications = () => {
   return (
     <>
-      <div className="md:container flex justify-center items-center">
+      <div className="md:container flex justify-center items-center mt-20">
         <div className="flex justify-center w-full">
           <div className="hidden md:block w-3/6  p-4 m-4 self-center">
             <Image src={NotificationIcon} alt="logo" />
