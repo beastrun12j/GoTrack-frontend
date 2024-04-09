@@ -33,7 +33,7 @@ export default function Header() {
           <>
             <NavLink href="/dashboard">
               <div className="text-black-900 hover:text-blue-600 mx-3 text-center">
-                Home
+                Dashboard
               </div>
             </NavLink>
 
@@ -58,7 +58,7 @@ export default function Header() {
                   <NavLink href="/dashboard">
                     <SheetClose>
                       <div className="text-black-900 hover:text-blue-600 mx-3 text-center">
-                        Home
+                        Dashboard
                       </div>
                     </SheetClose>
                   </NavLink>

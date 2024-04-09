@@ -1,4 +1,4 @@
-type Project = {
+export type Project = {
   projectId: number;
   projectName: string;
   projectDesc: string;
@@ -10,4 +10,14 @@ type Project = {
   updatedAt: Date;
 };
 
-export default Project;
+export type CreateProjectRequest = {
+  projectName: string;
+  projectDesc: string;
+  projectCategoryID: number;
+  projectURL: string;
+  organisationID: string;
+};
+
+export type CreateProjectErrorResponse = {
+  message: string;
+};
