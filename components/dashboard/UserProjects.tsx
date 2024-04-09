@@ -1,6 +1,6 @@
 import Image from "next/image";
 import DefaultImage from "@/assets/defaultProject.png";
-import Project from "@/types/Project";
+import { Project } from "@/types/Project";
 import Link from "next/link";
 import addIcon from "@/assets/addNew.png";
 

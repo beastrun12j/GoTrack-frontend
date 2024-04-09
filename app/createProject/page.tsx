@@ -10,6 +10,11 @@ import {
 
 import { getAuth } from "@/utils/AuthUtils";
 
+import Link from "next/link";
+
+import { sendProjectData } from "@/actions/ProjectActions";
+import { GetOrganisationsByUser } from "@/utils/OrganisationUtils";
+
 const GetProjectCategories = async () => {
   const auth = getAuth();
   if (!auth) return undefined;
@@ -29,10 +34,17 @@ const GetProjectCategories = async () => {
 export default async function CreateProject() {
   const projectCategories = await GetProjectCategories();
 
+  const organisation = await GetOrganisationsByUser();
+
+  const organisationID = await organisation[0].organisationId;
+
   return (
     <>
       <div className="md:container flex w-full justify-center">
-        <div className="my-6 mx-3 sm:m-8 sm:p-8 sm:mt-6 pt-6 w-full sm:w-5/6">
+        <form
+          className="my-6 mx-3 sm:m-8 sm:p-8 sm:mt-6 pt-6 w-full sm:w-5/6"
+          action={sendProjectData}
+        >
           <div className="flex mt-4 justify-center sm:justify-start">
             <div className="m-4 text-3xl sm:text-4xl font-bold">
               <h1>Add Project Details</h1>
@@ -55,16 +67,22 @@ export default async function CreateProject() {
               <input
                 type="text"
                 className="border-solid border-2 border-sky-500 rounded-md w-full h-10 sm:p-2"
+                name="projectName"
+                required
               />
             </div>
 
             <div className="w-1/6"></div>
 
+            <div className="hidden">
+              <input type="text" name="organisationID" value={organisationID} />
+            </div>
+
             <div className="mx-5 sm:w-3/4 my-2 ">
               <p className="flex mb-2">
                 Category <p className="text-red-500">*</p>
               </p>
-              <Select>
+              <Select name="category" required>
                 <SelectTrigger className="w-full border-2 border-sky-500 ">
                   <SelectValue placeholder="Select Category" />
                 </SelectTrigger>
@@ -87,7 +105,10 @@ export default async function CreateProject() {
           <div className="flex flex-col sm:flex-row justify-between sm:m-4 w-full">
             <div className="mx-5 sm:mx-0 sm:w-3/4 my-2">
               <p className="mb-2">Description</p>
-              <textarea className="border-solid border-2 border-sky-500 rounded-md w-full h-36 p-2"></textarea>
+              <textarea
+                className="border-solid border-2 border-sky-500 rounded-md w-full h-36 p-2"
+                name="description"
+              ></textarea>
             </div>
 
             <div className="w-1/6"></div>
@@ -97,19 +118,28 @@ export default async function CreateProject() {
               <input
                 type="text"
                 className="border-solid border-2 border-sky-500 rounded-md w-full h-10 p-2"
+                name="url"
               />
             </div>
           </div>
 
           <div className="flex flex-col-reverse sm:flex-row sm:justify-end">
-            <button className="text-gray-600 bg-gray-300 border border-gray-300 rounded-md my-1 mx-4 sm:mx-0 sm:my-0 sm:mr-1 p-2 px-4">
-              Cancel
-            </button>
-            <button className="text-white bg-blue-500 border border-sky-500 rounded-md my-1 mt-5 sm:mt-0 mx-4 sm:mx-0 sm:my-0 sm:ml-1 p-2 px-4">
+            <Link href="/dashboard">
+              <button className="text-gray-600 bg-gray-300 border border-gray-300 rounded-md my-1 mx-4 sm:mx-0 sm:my-0 sm:mr-1 p-2 px-4">
+                Cancel
+              </button>
+            </Link>
+
+            <button
+              type="submit"
+              className="text-white bg-blue-500 border border-sky-500 rounded-md my-1 mt-5 sm:mt-0 mx-4 sm:mx-0 sm:my-0 sm:ml-1 p-2 px-4"
+            >
               Submit
             </button>
+
+            {/* <AddProject /> */}
           </div>
-        </div>
+        </form>
       </div>
     </>
   );
