@@ -21,3 +21,8 @@ export type CreateProjectRequest = {
 export type CreateProjectErrorResponse = {
   message: string;
 };
+
+export type projectCategories = {
+  projectCategories: string[];
+  organisationID: number;
+};
