@@ -1,26 +1,32 @@
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "@/components/ui/resizable";
+import Avatars from "@/components/project/Avatars";
+import SearchInput from "@/components/project/SearchInput";
+import { Toggle } from "@/components/ui/toggle";
+// import Board from "@/components/project/KanbanBoard";
 
 export default function KanbanBoard() {
   return (
-    <ResizablePanelGroup
-      direction="horizontal"
-      className="min-h-[93vh] rounded-lg border w-full"
-    >
-      <ResizablePanel defaultSize={25}>
-        <div className="flex h-full items-center justify-center p-6">
-          <span className="font-semibold">Sidebar</span>
-        </div>
-      </ResizablePanel>
-      <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={75}>
-        <div className="flex h-full items-center justify-center p-6">
-          <span className="font-semibold">Content</span>
-        </div>
-      </ResizablePanel>
-    </ResizablePanelGroup>
+    <div className="m-8">
+      <div className="text-gray-500 text-sm my-4">
+        Projects / Google meet / Kanban board
+      </div>
+      <div className="text-2xl font-semibold">Kanban board</div>
+      <div className="mt-6 flex space-x-4">
+        <SearchInput />
+        <Avatars />
+        <Toggle
+          aria-label="Toggle italic"
+          className="text-gray-500 font-normal"
+        >
+          Only My Issues
+        </Toggle>
+        <Toggle
+          aria-label="Toggle italic"
+          className="text-gray-500 font-normal"
+        >
+          Recently Updated
+        </Toggle>
+      </div>
+      {/* <Board /> */}
+    </div>
   );
 }
