@@ -33,7 +33,10 @@ export default async function KanbanBoard({
   return (
     <div className="grid grid-cols-12 min-h-screen">
       <aside className="col-span-2">
-        <SideNav projectName={project.projectName} />
+        <SideNav
+          projectName={project.projectName}
+          projectId={project.projectid}
+        />
       </aside>
       <main className="col-span-10 ml-5">
         <div className="overflow-x-hidden">

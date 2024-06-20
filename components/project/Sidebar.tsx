@@ -7,16 +7,17 @@ import SidebarLink from "@/components/project/SidebarLink";
 
 interface SideNavProps {
   projectName: string;
+  projectId: number;
 }
 
-const SideNav = ( { projectName } : SideNavProps ) => {
+const SideNav = ({ projectName, projectId }: SideNavProps) => {
   return (
     <nav className="bg-[#f4f5f7] h-screen w-64 py-4 fixed">
       <div className="flex pl-4 mb-1">
         <Image src={ProjectImage} alt="Logo" width={80} height={80} />
         <div className="flex flex-col ">
           <span className="mt-2 text-[#172b4d] font-semibold text-md ">
-            { projectName }
+            {projectName}
           </span>
           <span className="mt-1 text-[#172b4d]  text-xs">Software project</span>
         </div>
@@ -24,7 +25,7 @@ const SideNav = ( { projectName } : SideNavProps ) => {
       <ul className="px-6">
         <li className="mb-2">
           <SidebarLink
-            href="/project/1/board"
+            href={`/project/${projectId}/board`}
             className="flex text-sm hover:bg-[#ebecf0] px-4 py-2 items-center"
           >
             <MdOutlineViewKanban size={25} />
@@ -33,7 +34,7 @@ const SideNav = ( { projectName } : SideNavProps ) => {
         </li>
         <li className="mb-2">
           <SidebarLink
-            href="/project/1/settings"
+            href={`/project/${projectId}/settings`}
             className="flex text-sm hover:bg-[#ebecf0] px-4 py-2 items-center"
           >
             <MdOutlineSettings size={25} />
