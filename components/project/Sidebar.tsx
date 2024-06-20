@@ -5,14 +5,18 @@ import { MdOutlineViewKanban } from "react-icons/md";
 import { MdOutlineSettings } from "react-icons/md";
 import SidebarLink from "@/components/project/SidebarLink";
 
-const SideNav = () => {
+interface SideNavProps {
+  projectName: string;
+}
+
+const SideNav = ( { projectName } : SideNavProps ) => {
   return (
-    <nav className="bg-[#f4f5f7] h-screen w-64 py-4">
+    <nav className="bg-[#f4f5f7] h-screen w-64 py-4 fixed">
       <div className="flex pl-4 mb-1">
         <Image src={ProjectImage} alt="Logo" width={80} height={80} />
         <div className="flex flex-col ">
           <span className="mt-2 text-[#172b4d] font-semibold text-md ">
-            Google meet
+            { projectName }
           </span>
           <span className="mt-1 text-[#172b4d]  text-xs">Software project</span>
         </div>
