@@ -1,5 +1,5 @@
 export type Project = {
-  projectId: number;
+  projectid: number;
   projectName: string;
   projectDesc: string;
   projectCategoryID: number;

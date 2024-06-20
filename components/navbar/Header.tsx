@@ -21,7 +21,7 @@ export default function Header() {
   const { user } = useUser();
 
   return (
-    <nav className="flex items-center justify-between px-6 shadow-md bg-white-700">
+    <nav className="sticky top-0 flex items-center justify-between px-6 shadow-md bg-white z-50">
       <div className="hidden md:left-side md:flex md:items-center">
         <Link href="/">
           <div className="text-lg font-bold text-black-900 uppercase mx-3 border-b-4 border-b-transparent py-4 pb-2">

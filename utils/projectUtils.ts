@@ -15,3 +15,4 @@ export const GetProjectCategories = async () => {
   
     return response.json();
   };
+
