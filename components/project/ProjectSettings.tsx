@@ -111,7 +111,7 @@ export default function ProjectSettings({
 
               <div className="mt-6">
                 <p className="text-gray-600">Project Category</p>
-                <Select name="category" required defaultValue={projectCategory}>
+                <Select name="category" required>
                   <SelectTrigger className="w-full h-1/6 border-2 border-gray-300 bg-gray-100 text-gray-950">
                     <SelectValue placeholder={projectCategory} />
                   </SelectTrigger>
