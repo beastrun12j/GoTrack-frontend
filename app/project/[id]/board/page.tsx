@@ -41,7 +41,7 @@ export default async function KanbanBoard({
       <main className="col-span-10 ml-5">
         <div className="overflow-x-hidden">
           <div className="m-8 overflow-hidden sticky">
-            <div className="text-gray-500 text-sm my-4">
+            <div className="text-gray-500 text-sm mb-4">
               Projects / {project.projectName} / Kanban board
             </div>
             <div className="text-2xl font-semibold">Kanban board</div>
