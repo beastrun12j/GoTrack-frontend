@@ -9,6 +9,7 @@ import {
 
 import "./globals.css";
 import Header from "@/components/navbar/Header";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,6 +39,7 @@ export default async function RootLayout({
                 <div className="overflow-x-hidden">{children}</div>
               </div>
             </main>
+            <Toaster />
           </ClerkLoaded>
         </body>
       </html>
