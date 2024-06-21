@@ -57,3 +57,41 @@ export async function sendProjectData(data: FormData) {
   revalidatePath("/dashboard");
   redirect("/dashboard");
 }
+
+export async function updateProjectData(data: FormData) {
+  const projectName = data.get("projectName");
+  const projectId = data.get("projectId");
+  const description = data.get("description");
+  const category = data.get("category");
+  const url = data.get("url");
+  const organisationID = data.get("organisationID");
+
+  const auth = getAuth();
+  if (!auth) return undefined;
+
+  const dummyData = {
+    projectId: projectId,
+    projectName: projectName,
+    projectDesc: description,
+    projectURL: url,
+    projectCategory: category,
+    organisationID: organisationID,
+    userUUID: auth.userId,
+  };
+
+  console.log(dummyData);
+
+  const response = await fetch(
+    `${process.env.BACKEND_BASE_URL}/api/projects/${projectId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${auth.token}`,
+      },
+      body: JSON.stringify(dummyData),
+    }
+  );
+
+  const responseBody = await response.json();
+}
