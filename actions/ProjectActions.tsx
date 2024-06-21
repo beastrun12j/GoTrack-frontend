@@ -79,8 +79,6 @@ export async function updateProjectData(data: FormData) {
     userUUID: auth.userId,
   };
 
-  console.log(dummyData);
-
   const response = await fetch(
     `${process.env.BACKEND_BASE_URL}/api/projects/${projectId}`,
     {
