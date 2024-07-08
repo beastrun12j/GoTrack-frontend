@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import { updateProjectData } from "@/actions/ProjectActions";
 import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 interface ProjectSettingsProps {
   project: Project;
@@ -28,6 +29,27 @@ export default function ProjectSettings({
   const [projectURL, setProjectURL] = useState(project.projectURL);
   const [projectDesc, setProjectDesc] = useState(project.projectDesc);
 
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const formData = new FormData(e.currentTarget);
+      await updateProjectData(formData);
+
+      toast({
+        title: "Success",
+        description: "Project data updated successfully.",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to update project data.",
+      });
+    }
+  };
+
   return (
     <div className="m-4">
       <div className="flex">
@@ -39,7 +61,7 @@ export default function ProjectSettings({
 
             <div className="text-2xl font-semibold mb-8">Project Details</div>
 
-            <form action={updateProjectData}>
+            <form onSubmit={handleSubmit}>
               <div>
                 <p className="text-gray-600">Name</p>
                 <input

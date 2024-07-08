@@ -92,4 +92,9 @@ export async function updateProjectData(data: FormData) {
   );
 
   const responseBody = await response.json();
+
+  if (response.status !== 200) {
+    const errorResponse: CreateProjectErrorResponse = responseBody;
+    throw new Error(errorResponse.message);
+  }
 }
